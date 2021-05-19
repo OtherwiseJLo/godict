@@ -1,4 +1,4 @@
-package main
+package trie
 
 type Trie struct {
 	root TrieNode
@@ -9,6 +9,15 @@ type TrieNode struct {
 	isWord   bool
 }
 
+func NewTrie() Trie {
+	return Trie{
+		root: TrieNode{
+			children: make(map[rune]TrieNode),
+			isWord:   false,
+		},
+	}
+}
+
 func (trie Trie) Insert(word string) {
 	currentNode := trie.root
 	for idx, char := range word {
@@ -17,7 +26,7 @@ func (trie Trie) Insert(word string) {
 		} else {
 			currentNode.children[char] = TrieNode{
 				children: make(map[rune]TrieNode),
-				isWord:   idx == len(word)+1,
+				isWord:   idx == len(word)-1,
 			}
 			currentNode = currentNode.children[char]
 		}
