@@ -75,3 +75,18 @@ func TestCount(t *testing.T) {
 		}
 	}
 }
+
+func TestList(t *testing.T) {
+	trie := NewTrie()
+
+	for _, word := range words {
+		trie.Insert(word)
+		wordCount := trie.Count()
+		wordList := trie.List()
+		if len(wordList) != wordCount {
+			t.Errorf("Expected count of %d", wordCount)
+			t.Log(wordList)
+		}
+
+	}
+}

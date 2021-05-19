@@ -76,8 +76,8 @@ func (node *TrieNode) DFSList(path []rune) []string {
 	if node.isWord {
 		words = append(words, string(path))
 	}
-	for _, child := range node.children {
-		words = append(words, child.DFSList(path)...)
+	for char, child := range node.children {
+		words = append(words, child.DFSList(append(path, char))...)
 	}
 
 	return words
