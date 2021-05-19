@@ -71,7 +71,24 @@ func (node *TrieNode) DFSCount() int {
 	return count
 }
 
+func (node *TrieNode) DFSList(path []rune) []string {
+	var words []string
+	if node.isWord {
+		words = append(words, string(path))
+	}
+	for _, child := range node.children {
+		words = append(words, child.DFSList(path)...)
+	}
+
+	return words
+}
+
 func (trie *Trie) Count() int {
 	currentNode := trie.root
 	return currentNode.DFSCount()
+}
+
+func (trie *Trie) List() []string {
+	currentNode := trie.root
+	return currentNode.DFSList(make([]rune, 0))
 }
