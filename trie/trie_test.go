@@ -2,35 +2,29 @@ package trie
 
 import "testing"
 
-type BagOfWords struct {
-	words map[string]int
-}
+var words = []string{"build", "builds", "graph", "graphite", "graphing", "gran", "granular", "graphic", "a", "an", "and", "andes", "intellect", "intel", "int", "in", "i"}
 
-func NewBagOfWords(words ...string) BagOfWords {
-	bow := make(map[string]int)
-	for idx, word := range words {
-		bow[word] = idx
+func contains(words []string, partial string) bool {
+	for _, word := range words {
+		if word == partial {
+			return true
+		}
 	}
-	return BagOfWords{
-		words: bow,
-	}
+	return false
 }
 
-func (bow BagOfWords) Contains(word string) bool {
-	_, ok := bow.words[word]
-	return ok
-}
-
-var bow BagOfWords = NewBagOfWords("build", "builds", "graph", "graphite", "graphing", "gran", "granular", "graphic", "a", "an", "and", "andes", "intellect", "intel", "int", "in", "i")
+// var bow BagOfWords = NewBagOfWords("build", "builds", "graph", "graphite", "graphing", "gran", "granular", "graphic", "a", "an", "and", "andes", "intellect", "intel", "int", "in", "i")
 
 func TestInsert(t *testing.T) {
 	trie := NewTrie()
 
-	for word, testIdx := range bow.words {
-		t.Logf("%d TestInsert: %s", testIdx, word)
+	for testIdx, word := range words {
+		t.Logf("%d2 TestInsert: %s", testIdx, word)
 		trie.Insert(word)
 		node := trie.root
 		for idx, char := range word {
+            t.Log(char)
+			t.Log(node.children)
 			if _, ok := node.children[char]; ok {
 				node = node.children[char]
 			} else {
@@ -43,7 +37,7 @@ func TestInsert(t *testing.T) {
 func TestContains(t *testing.T) {
 	trie := NewTrie()
 
-	for word, testIdx := range bow.words {
+	for testIdx, word := range words {
 		t.Logf("%d TestContains: %s", testIdx, word)
 		trie.Insert(word)
 
@@ -53,7 +47,7 @@ func TestContains(t *testing.T) {
 			partialWord := string(path)
 			if trie.Contains(partialWord) {
 				if idx != len(word)-1 {
-					if !bow.Contains(partialWord) {
+					if !contains(words, partialWord) {
 						t.Errorf("%s: %s should not be in trie", word, partialWord)
 					}
 				}

@@ -1,39 +1,38 @@
 package trie
 
 type Trie struct {
-	root TrieNode
+	root *TrieNode
 }
 
 type TrieNode struct {
-	children map[rune]TrieNode
+	children map[rune]*TrieNode
 	isWord   bool
 }
 
-func NewTrie() Trie {
-	return Trie{
-		root: TrieNode{
-			children: make(map[rune]TrieNode),
+func NewTrie() *Trie {
+	return &Trie{
+		root: &TrieNode{
+			children: make(map[rune]*TrieNode),
 			isWord:   false,
 		},
 	}
 }
 
-func (trie Trie) Insert(word string) {
+func (trie *Trie) Insert(word string) {
 	currentNode := trie.root
-	for idx, char := range word {
-		if _, ok := currentNode.children[char]; ok {
-			currentNode = currentNode.children[char]
-		} else {
-			currentNode.children[char] = TrieNode{
-				children: make(map[rune]TrieNode),
-				isWord:   idx == len(word)-1,
+	for _, char := range word {
+		if currentNode.children[char] == nil {
+			currentNode.children[char] = &TrieNode{
+				children: make(map[rune]*TrieNode),
+				isWord:   false,
 			}
-			currentNode = currentNode.children[char]
 		}
+		currentNode = currentNode.children[char]
 	}
+	currentNode.isWord = true
 }
 
-func (trie Trie) Contains(word string) bool {
+func (trie *Trie) Contains(word string) bool {
 	currentNode := trie.root
 	for _, char := range word {
 		if _, ok := currentNode.children[char]; ok {
