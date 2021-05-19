@@ -60,7 +60,18 @@ func dfs(node *TrieNode, path []rune) int {
 	return count
 }
 
+func (node *TrieNode) DFSCount() int {
+	count := 0
+	if node.isWord {
+		count = 1
+	}
+	for _, child := range node.children {
+		count += child.DFSCount()
+	}
+	return count
+}
+
 func (trie *Trie) Count() int {
 	currentNode := trie.root
-	return dfs(currentNode, make([]rune, 1))
+	return currentNode.DFSCount()
 }
