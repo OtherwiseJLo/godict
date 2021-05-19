@@ -11,10 +11,14 @@ type TrieNode struct {
 
 func NewTrie() *Trie {
 	return &Trie{
-		root: &TrieNode{
-			children: make(map[rune]*TrieNode),
-			isWord:   false,
-		},
+		root: NewTrieNode(),
+	}
+}
+
+func NewTrieNode() *TrieNode {
+	return &TrieNode{
+		children: make(map[rune]*TrieNode),
+		isWord:   false,
 	}
 }
 
@@ -22,10 +26,7 @@ func (trie *Trie) Insert(word string) {
 	currentNode := trie.root
 	for _, char := range word {
 		if currentNode.children[char] == nil {
-			currentNode.children[char] = &TrieNode{
-				children: make(map[rune]*TrieNode),
-				isWord:   false,
-			}
+			currentNode.children[char] = NewTrieNode()
 		}
 		currentNode = currentNode.children[char]
 	}
