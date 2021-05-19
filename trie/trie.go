@@ -51,6 +51,5 @@ func (trie *Trie) Contains(word string) bool {
 }
 
 func (trie *Trie) Count() int {
-	currentNode := trie.root
 	return 0
 }
