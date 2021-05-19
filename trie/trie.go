@@ -13,7 +13,6 @@ type NodeDequeue struct {
 	nodes []*TrieNode
 }
 
-
 func NewTrie() *Trie {
 	return &Trie{
 		root: NewTrieNode(),
@@ -50,6 +49,18 @@ func (trie *Trie) Contains(word string) bool {
 	return currentNode.isWord
 }
 
+func dfs(node *TrieNode, path []rune) int {
+	count := 0
+	if node.isWord {
+		count = 1
+	}
+	for char, child := range node.children {
+		count += dfs(child, append(path, char))
+	}
+	return count
+}
+
 func (trie *Trie) Count() int {
-	return 0
+	currentNode := trie.root
+	return dfs(currentNode, make([]rune, 1))
 }

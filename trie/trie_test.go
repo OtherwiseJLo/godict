@@ -60,3 +60,18 @@ func TestContains(t *testing.T) {
 		}
 	}
 }
+
+func TestCount(t *testing.T) {
+	trie := NewTrie()
+
+	actualCount := 0
+	expectedCount := 0
+	for _, word := range words {
+		trie.Insert(word)
+		expectedCount += 1
+		actualCount = trie.Count()
+		if actualCount != expectedCount {
+			t.Errorf("Expected count of %d, got count of %d", expectedCount, actualCount)
+		}
+	}
+}
