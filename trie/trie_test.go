@@ -23,7 +23,7 @@ func TestInsert(t *testing.T) {
 		trie.Insert(word)
 		node := trie.root
 		for idx, char := range word {
-            t.Log(char)
+			t.Log(char)
 			t.Log(node.children)
 			if _, ok := node.children[char]; ok {
 				node = node.children[char]

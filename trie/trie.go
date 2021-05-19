@@ -9,6 +9,11 @@ type TrieNode struct {
 	isWord   bool
 }
 
+type NodeDequeue struct {
+	nodes []*TrieNode
+}
+
+
 func NewTrie() *Trie {
 	return &Trie{
 		root: NewTrieNode(),
@@ -43,4 +48,9 @@ func (trie *Trie) Contains(word string) bool {
 		}
 	}
 	return currentNode.isWord
+}
+
+func (trie *Trie) Count() int {
+	currentNode := trie.root
+	return 0
 }
