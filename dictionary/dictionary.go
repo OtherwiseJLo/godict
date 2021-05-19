@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"os"
 
 	badger "github.com/dgraph-io/badger/v3"
@@ -84,7 +85,13 @@ func readJSONDictionary(dictionaryFile string) Dictionary {
 
 func main() {
 	dict := readJSONDictionary("dictionary.json")
-	fmt.Println(dict.Count())
+	// fmt.Println(dict.Count())
 	// fmt.Println(dict.List())
 	dict.Read("Canter")
+
+	db, err := badger.Open(badger.DefaultOptions("dictionary"))
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer db.Close()
 }
