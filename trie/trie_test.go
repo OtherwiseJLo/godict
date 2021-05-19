@@ -13,8 +13,6 @@ func contains(words []string, partial string) bool {
 	return false
 }
 
-// var bow BagOfWords = NewBagOfWords("build", "builds", "graph", "graphite", "graphing", "gran", "granular", "graphic", "a", "an", "and", "andes", "intellect", "intel", "int", "in", "i")
-
 func TestInsert(t *testing.T) {
 	trie := NewTrie()
 
