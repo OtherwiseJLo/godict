@@ -21,10 +21,10 @@ func (bow BagOfWords) Contains(word string) bool {
 	return ok
 }
 
+var bow BagOfWords = NewBagOfWords("build", "builds", "graph", "graphite", "graphing", "gran", "granular", "graphic", "a", "an", "and", "andes", "intellect", "intel", "int", "in", "i")
+
 func TestInsert(t *testing.T) {
 	trie := NewTrie()
-
-	bow := NewBagOfWords("build", "builds")
 
 	for word, testIdx := range bow.words {
 		t.Logf("%d TestInsert: %s", testIdx, word)
@@ -42,7 +42,6 @@ func TestInsert(t *testing.T) {
 
 func TestContains(t *testing.T) {
 	trie := NewTrie()
-	bow := NewBagOfWords("build", "builds")
 
 	for word, testIdx := range bow.words {
 		t.Logf("%d TestContains: %s", testIdx, word)
@@ -64,6 +63,6 @@ func TestContains(t *testing.T) {
 			t.Logf("%s found in trie", word)
 		} else {
 			t.Errorf("could not find %s in trie", word)
-        }
+		}
 	}
 }
