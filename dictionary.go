@@ -6,8 +6,6 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
-
-	badger "github.com/dgraph-io/badger/v3"
 )
 
 type Entries struct {
