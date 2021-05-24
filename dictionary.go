@@ -4,10 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"os"
-
-	badger "github.com/dgraph-io/badger/v3"
 )
 
 type Entries struct {
@@ -89,9 +86,4 @@ func main() {
 	// fmt.Println(dict.List())
 	dict.Read("Canter")
 
-	db, err := badger.Open(badger.DefaultOptions("dictionary"))
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer db.Close()
 }

@@ -1,7 +1,7 @@
 /*
 Package trie implements a simple library for the Trie data structure
 */
-package trie
+package main
 
 // TrieNode represents a single node in a Trie
 type TrieNode struct {
