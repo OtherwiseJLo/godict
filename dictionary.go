@@ -26,6 +26,11 @@ type Dictionary struct {
 	words map[string][]Definition
 }
 
+type WordsTable struct {
+	ID   uint
+	Word string
+}
+
 func NewDictionary() Dictionary {
 	return Dictionary{
 		words: make(map[string][]Definition),
