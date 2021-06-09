@@ -43,10 +43,10 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			return m, tea.Quit
 		}
 
-	// We handle errors just like any other message
-	case tea.errMsg:
+		// We handle errors just like any other message
+		/* case tea.errMsg:
 		m.err = msg
-		return m, nil
+		return m, nil */
 	}
 
 	m.searchBox, cmd = m.searchBox.Update(msg)
@@ -55,7 +55,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 func (m model) View() string {
 	return fmt.Sprintf(
-		"What’s your favorite Pokémon?\n\n%s\n\n%s",
+		"Search For term\n\n%s\n\n%s",
 		m.searchBox.View(),
 		"(esc to quit)",
 	) + "\n"

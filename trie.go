@@ -96,3 +96,7 @@ func (trie *Trie) List() []string {
 	currentNode := trie.root
 	return currentNode.DFSList(make([]rune, 0))
 }
+
+func (trie *Trie) Search(partial string) {
+
+}
