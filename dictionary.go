@@ -85,7 +85,7 @@ func readJSONDictionary(dictionaryFile string) Dictionary {
 	return dict
 }
 
-func main() {
+func test_dict() {
 	dict := readJSONDictionary("dictionary.json")
 	// fmt.Println(dict.Count())
 	// fmt.Println(dict.List())
